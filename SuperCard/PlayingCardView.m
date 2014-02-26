@@ -55,7 +55,20 @@
     UIRectFill (self.bounds);
     [[UIColor blackColor]setStroke];
     [roundedRect stroke];
-    [self drawCorners];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];
+    paragraphStyle.alignment = NSTextAlignmentCenter;
+    UIFont *cornerFont = [UIFont preferredFontForTextStyle: UIFontTextStyleBody];
+    cornerFont = [cornerFont fontWithSize:cornerFont.pointSize * [self cornerScaleFactor]];
+    NSString *cornerString = [NSString stringWithFormat:@ "%@\n%@", [self rankAsString:self.rank ], self.suit];
+    NSAttributedString *cornterText = [[NSAttributedString alloc] initWithString:cornerString attributes:@{NSFontAttributeName: cornerFont, NSParagraphStyleAttributeName: paragraphStyle}];
+    CGRect textBounds;
+    textBounds.origin = CGPointMake([self cornerOffset], [self cornerOffset]);
+    textBounds.size = [cornterText size];
+    [cornterText drawInRect:textBounds];
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    CGContextTranslateCTM(ctx, self.bounds.size.width, self.bounds.size.height);
+    CGContextRotateCTM(ctx, M_PI);
+    [cornterText drawInRect:textBounds];
 
 }
 -(void) setUp
@@ -68,24 +81,6 @@
 -(void) awakeFromNib
 {
     [self setUp];
-}
--(void)drawCorners
-
-{
-    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];
-    paragraphStyle.alignment = NSTextAlignmentCenter;
-    UIFont *cornerFont = [UIFont preferredFontForTextStyle: UIFontTextStyleBody];
-    cornerFont = [cornerFont fontWithSize:cornerFont.pointSize * [self cornerScaleFactor]];
-    NSString *cornerString = [NSString stringWithFormat:@ "@%@\n%@", [self rankAsString:self.rank ], self.suit];
-    NSAttributedString *cornterText = [[NSAttributedString alloc] initWithString:cornerString attributes:@ {NSFontAttributeName: cornerFont, NSParagraphStyleAttributeName: paragraphStyle}];
-    CGRect textBounds;
-    textBounds.origin = CGPointMake([self cornerOffset], [self cornerOffset]);
-    textBounds.size = [cornterText size];
-    [cornterText drawInRect:textBounds];
-    CGContextRef ctx = UIGraphicsGetCurrentContext();
-    CGContextTranslateCTM(ctx, self.bounds.size.width, self.bounds.size.height);
-    CGContextRotateCTM(ctx, 180);
-    [cornterText drawInRect:textBounds];
 }
 
 -(NSString *)rankAsString: (NSUInteger)rank {

@@ -16,14 +16,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bv4-P6-fKF" customClass="PlayingCardView">
-                                <rect key="frame" x="47" y="142" width="226" height="375"/>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bv4-P6-fKF" customClass="PlayingCardView">
+                                <rect key="frame" x="47" y="138" width="226" height="375"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.50196081399917603" blue="0.25098040699958801" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="cNH-a3-U8l" firstAttribute="top" secondItem="bv4-P6-fKF" secondAttribute="bottom" constant="55" id="Xfs-Hr-aMR"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="cardView" destination="bv4-P6-fKF" id="Rg7-dd-u03"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>

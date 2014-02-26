@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PlayingCardView.h"
 
 @interface SuperCardViewController : UIViewController
+
+
 
 @end
