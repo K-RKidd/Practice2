@@ -10,12 +10,13 @@
 
 @interface PlayingCardView : UIView
 
-@property (nonatomic) NSUInteger *rank;
+@property (nonatomic) NSUInteger rank;
 @property (nonatomic, strong) NSString *suit;
 @property (nonatomic) BOOL faceUp;
 
 -(CGFloat) cornerScaleFactor;
 -(CGFloat) cornerRadius;
 -(CGFloat) cornerOffset;
+- (NSString *)rankAsString:(NSUInteger)rank;
 
 @end

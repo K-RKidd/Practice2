@@ -11,7 +11,7 @@
 @implementation PlayingCardView
 
 
--(void)setRank:(NSUInteger *)rank {
+-(void)setRank:(NSUInteger)rank {
     _rank = rank;
     [self setNeedsDisplay];
 }
@@ -44,7 +44,7 @@
 }
 -(CGFloat) cornerOffset
 {
-    CGFloat offset = [self cornerRadius] *3.0;
+    CGFloat offset = [self cornerRadius] /3.0;
     return offset;
 }
 -(void) drawRect:(CGRect)rect
@@ -76,13 +76,13 @@
     paragraphStyle.alignment = NSTextAlignmentCenter;
     UIFont *cornerFont = [UIFont preferredFontForTextStyle: UIFontTextStyleBody];
     cornerFont = [cornerFont fontWithSize:cornerFont.pointSize * [self cornerScaleFactor]];
-    NSString *cornerString = [NSString stringWithFormat:@ "@%\n%@", [self rankAsString], self.suit];
+    NSString *cornerString = [NSString stringWithFormat:@ "@%@\n%@", [self rankAsString:self.rank ], self.suit];
     NSAttributedString *cornterText = [[NSAttributedString alloc] initWithString:cornerString attributes:@ {NSFontAttributeName: cornerFont, NSParagraphStyleAttributeName: paragraphStyle}];
     CGRect textBounds;
     textBounds.origin = CGPointMake([self cornerOffset], [self cornerOffset]);
     textBounds.size = [cornterText size];
     [cornterText drawInRect:textBounds];
-    CGContextRef *ctx = UIGraphicsGetCurrentContext();
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
     CGContextTranslateCTM(ctx, self.bounds.size.width, self.bounds.size.height);
     CGContextRotateCTM(ctx, 180);
     [cornterText drawInRect:textBounds];
